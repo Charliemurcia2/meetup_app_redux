@@ -6,7 +6,7 @@ import classes from './MeetupList.module.css'
 const MeetupList = props => {
    return (
       <ul className={classes.list}>
-        {props.meetups.map(meetup => <MeetupItem key={meetup.id} meetup={meetup}/>)}
+        {props.meetups.map(meetup => <MeetupItem key={meetup.id} meetup={meetup} deleteItem={props.deleteItem}/>)}
       </ul>
    )
 }

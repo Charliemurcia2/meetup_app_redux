@@ -1,0 +1,23 @@
+.popup {
+  color: rgb(16, 73, 73);
+  display: flex;
+  border: 1px solid rgb(167, 241, 167);
+  background-color: rgb(208, 242, 242);
+  justify-content: space-around;
+  align-items: center;
+}
+.close {
+  font: inherit;
+  cursor: pointer;
+  color: #22a389;
+  border: 1px solid #21d13c;
+  background-color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+
+.close:hover,
+.close:active {
+  background-color: #ebf8eb;
+}
