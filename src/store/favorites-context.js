@@ -10,7 +10,7 @@ const FavoritesContext = createContext({
 })
 
  export const FavoritesContextProvider = props => {
-  const [userFavorites, setUserFavorites] = useState([])
+  const [userFavorites, setUserFavorites] = useState(props.items)
 
   const addFavoriteHandler = favoriteMeetup => {
     setUserFavorites(prevUserFavorites => {

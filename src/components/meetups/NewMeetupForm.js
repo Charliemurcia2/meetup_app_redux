@@ -15,13 +15,13 @@ const NewMeetupForm = props => {
     const enteredTitle = titleInputRef.current.value
     const enteredImage = imageInputRef.current.value
     const enteredAddress = addressInputRef.current.value
-    const entereDescription = descriptionInputRef.current.value
+    const enteredDescription = descriptionInputRef.current.value
 
     const meetupData = {
       title: enteredTitle,
       image: enteredImage,
       address: enteredAddress,
-      description: entereDescription
+      description: enteredDescription
     }
     
     props.onAddMeetup(meetupData)

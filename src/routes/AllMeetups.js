@@ -3,14 +3,16 @@ import { useState, useEffect } from 'react'
 
 import MeetupList from '../components/meetups/MeetupList'
 import DeletePopup from '../components/layout/DeletePopup'
+import SearchBar from '../components/layout/SearchBar'
 
 
 const AllMeetups = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [loadedMeetups, setLoadedMeetups] = useState([])
-  const [hasDeletion, setHasDeletion] = useState(false)
-  const [ isPopupDelete, setIsPopupDelete ] = useState(false)
+  const [staticLoadMeetups, setStaticLoadMeetups] = useState([])
+  const [isPopupDelete, setIsPopupDelete] = useState(false)
 
+  // useCallback
   const deleteItemHandler = meetupId => {
     fetch(
       `https://react-learn-1e665-default-rtdb.firebaseio.com/meetups/${meetupId}.json`,
@@ -18,18 +20,34 @@ const AllMeetups = () => {
         method: 'DELETE',
         mode: 'cors'
       }
-    )
+    ).then(() => {
+      loadContent()
+    })
     setIsPopupDelete(true)
-    setHasDeletion(true)
   }
 
   const closeDeletePopupHandler = () => {
     setIsPopupDelete(false)
   }
 
-  useEffect(() => {
-    setHasDeletion(false)
-    setIsLoading(true)
+  const searchFilter = searchTerm => {
+    const searchResult = staticLoadMeetups.filter(meetup => {
+     if (meetup.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return meetup
+     }
+    })
+    setLoadedMeetups(searchResult)
+  }
+
+  const onSearchTermChange = newTerm => {
+    if (newTerm.length !== 0) {
+      searchFilter(newTerm)  
+    } else {
+      setLoadedMeetups(staticLoadMeetups)
+    }
+  }
+
+  const loadContent = () => {
     fetch(
       'https://react-learn-1e665-default-rtdb.firebaseio.com/meetups.json'
     ).then(response => {
@@ -47,8 +65,14 @@ const AllMeetups = () => {
 
       setIsLoading(false)
       setLoadedMeetups(meetups)
+      setStaticLoadMeetups(meetups)
     })
-  }, [ hasDeletion ])
+  }
+
+  useEffect(() => {
+    setIsLoading(true)
+    loadContent()
+  }, [])
 
   if (isLoading) {
     return (
@@ -58,9 +82,11 @@ const AllMeetups = () => {
     )
   }
 
+
   return (
     <section>
       <DeletePopup appear={isPopupDelete} closeButton={closeDeletePopupHandler}></DeletePopup>
+      <SearchBar termChange={onSearchTermChange}></SearchBar>
       <h1>All Meetups</h1>
       <MeetupList meetups={loadedMeetups} deleteItem={deleteItemHandler}/>
     </section>
