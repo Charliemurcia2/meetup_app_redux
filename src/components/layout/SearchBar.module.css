@@ -4,6 +4,10 @@
   background-color: rgb(247, 242, 242);
 }
 
+.dark {
+  background-color: rgb(89, 85, 85);
+}
+
 .control label {
   width: 30%;
   font-weight: bold;
@@ -18,4 +22,8 @@
   border: 1px solid #ccc;
   padding: 0.25rem;
   width: 100%;
+}
+
+.dark input {
+  background-color: rgb(209, 199, 199);
 }

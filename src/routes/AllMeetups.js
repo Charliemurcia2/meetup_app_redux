@@ -35,6 +35,7 @@ const AllMeetups = () => {
      if (meetup.title.toLowerCase().includes(searchTerm.toLowerCase())) {
       return meetup
      }
+     return ''
     })
     setLoadedMeetups(searchResult)
   }

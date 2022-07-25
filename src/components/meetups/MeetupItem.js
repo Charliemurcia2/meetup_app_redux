@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import classes from './MeetupItem.module.css'
 import Card from '../ui/Card'
 import FavoritesContext from '../../store/favorites-context'
+// import ThemeContext from '../../store/theme-context'
 
 const MeetupItem = props => {
   const location = useLocation( )
@@ -13,6 +14,7 @@ const MeetupItem = props => {
 
   const favoritesCtx = useContext(FavoritesContext)
   const itemIsFavorite = favoritesCtx.itemIsFavorite(id)
+  // const themeCtx = useContext(ThemeContext)
 
   const toggleFavoriteStatusHandler = () => {
     if (itemIsFavorite) {

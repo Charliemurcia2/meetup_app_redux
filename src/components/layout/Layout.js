@@ -7,10 +7,9 @@ import ThemeContext from '../../store/theme-context'
 const Layout = props => {
   const themeCtx = useContext(ThemeContext)
   const theme = themeCtx.theme
-  console.log(theme)
   
   return (
-    <div>
+    <div className={classes[theme]}>
       <MainNavigation />
       <main className={classes.main}>
         {props.children}

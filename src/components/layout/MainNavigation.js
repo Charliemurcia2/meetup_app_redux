@@ -4,9 +4,15 @@ import { useContext } from 'react'
 
 import classes from './MainNavigation.module.css'
 import FavoritesContext from '../../store/favorites-context'
+import ThemeContext from '../../store/theme-context'
 
 const MainNavigation = () => {
   const favoritesCtx = useContext(FavoritesContext)
+  const themeCtx = useContext(ThemeContext)
+
+  const changeThemeHandler = event => {
+    themeCtx.changeTheme(event.target.value)
+  }
 
   return (
     <header className={classes.header}>
@@ -18,6 +24,10 @@ const MainNavigation = () => {
           <li><Link to='/favorites'>My favortites <span className={classes.badge}>{favoritesCtx.totalFavorites}</span></Link></li>
         </ul>
       </nav>
+      <select className={classes['theme-button']} onChange={changeThemeHandler}>
+        <option value='light'>light</option>
+        <option value='dark'>dark</option>
+      </select>
     </header>
   )
 }
