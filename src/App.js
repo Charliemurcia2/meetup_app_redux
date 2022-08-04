@@ -6,22 +6,25 @@ import Favorites from './routes/Favorites'
 import NewMeetup from './routes/NewMeetup'
 import Layout from './components/layout/Layout';
 import { ThemeContextProvider } from './store/theme-context';
+import { MeetupsContextProvider } from './store/meetups-context';
 const App = () => {
   return (
     <ThemeContextProvider>
-      <Layout>
-        <Switch>
-          <Route path='/' exact>
-            <AllMeetups />
-          </Route>
-          <Route path='/new-meetup'> 
-            <NewMeetup />
-          </Route>
-          <Route path='/favorites'>
-            <Favorites />
-          </Route>
-        </Switch>
-      </Layout>
+      <MeetupsContextProvider>
+        <Layout>
+          <Switch>
+            <Route path='/' exact>
+              <AllMeetups />
+            </Route>
+            <Route path='/new-meetup'> 
+              <NewMeetup />
+            </Route>
+            <Route path='/favorites'>
+              <Favorites />
+            </Route>
+          </Switch>
+        </Layout>
+      </MeetupsContextProvider>
     </ThemeContextProvider>
 
   )

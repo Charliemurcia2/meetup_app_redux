@@ -9,6 +9,8 @@ export const ThemeContextProvider = props => {
   const [theme, setTheme] = useState('light')
 
   const changeThemeHandler = chosenTheme => {
+    // TODO: ternary
+    // TODO: reducer to change theme
     if (chosenTheme === 'dark') {
       setTheme('dark')
     } else {

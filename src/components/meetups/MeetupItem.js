@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import classes from './MeetupItem.module.css'
 import Card from '../ui/Card'
 import FavoritesContext from '../../store/favorites-context'
-// import ThemeContext from '../../store/theme-context'
+import MeetupsContext from '../../store/meetups-context'
 
 const MeetupItem = props => {
   const location = useLocation( )
@@ -14,7 +14,7 @@ const MeetupItem = props => {
 
   const favoritesCtx = useContext(FavoritesContext)
   const itemIsFavorite = favoritesCtx.itemIsFavorite(id)
-  // const themeCtx = useContext(ThemeContext)
+  const {deleteItemHandler} = useContext(MeetupsContext)
 
   const toggleFavoriteStatusHandler = () => {
     if (itemIsFavorite) {
@@ -31,7 +31,7 @@ const MeetupItem = props => {
   }
 
   const deleteMeetupHandler = () => {
-    props.deleteItem(id)
+    deleteItemHandler(id)
   }
 
   return (
