@@ -5,16 +5,16 @@ import { useLocation } from 'react-router-dom'
 import classes from './MeetupItem.module.css'
 import Card from '../ui/Card'
 import FavoritesContext from '../../store/favorites-context'
-import MeetupsContext from '../../store/meetups-context'
+import useRequest from '../../hooks/use-request'
 
 const MeetupItem = props => {
   const location = useLocation( )
 
-  const { image, title, description, address, id } = props.meetup
+  const { image, title, description, address, id, date } = props.meetup
 
   const favoritesCtx = useContext(FavoritesContext)
   const itemIsFavorite = favoritesCtx.itemIsFavorite(id)
-  const {deleteItemHandler} = useContext(MeetupsContext)
+  const {deleteItemHandler} = useRequest()
 
   const toggleFavoriteStatusHandler = () => {
     if (itemIsFavorite) {
@@ -25,7 +25,8 @@ const MeetupItem = props => {
         title,
         description,
         image,
-        address
+        address,
+        date
       })
     }
   }
@@ -42,6 +43,7 @@ const MeetupItem = props => {
         </div>
         <div className={classes.content}>
           <h3>{title}</h3>
+          <p>{date}</p>
           <address>{address}</address>
           <p>{description}</p>
         </div>

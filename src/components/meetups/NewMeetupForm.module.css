@@ -22,6 +22,20 @@
   width: 100%;
 }
 
+.feed {
+  color: #b40e0e;
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
 .actions {
   margin-top: 1rem;
   text-align: right;
@@ -42,4 +56,13 @@
 .actions button:active {
   background-color: #a50e48;
   border-color: #a50e48;
+}
+
+.actions button:disabled,
+.actions button:disabled:hover,
+.actions button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
 }

@@ -1,36 +1,25 @@
-import React, { useContext } from 'react'
-import { useEffect } from 'react'
-
-import MeetupsContext from '../store/meetups-context'
+import React from 'react'
 
 import MeetupList from '../components/meetups/MeetupList'
 import DeletePopup from '../components/layout/DeletePopup'
-import SearchBar from '../components/layout/SearchBar'
+// import SearchBar from '../components/layout/SearchBar'
+import Loading from '../components/layout/Loading'
+import useRequest from '../hooks/use-request'
 
 
 
 const AllMeetups = () => {
-  const meetupsCtx = useContext(MeetupsContext)
-  const {loadContent, isLoading, notLoading} = meetupsCtx
+  const {isLoading, error} = useRequest()
 
-  useEffect(() => {
-    notLoading()
-    loadContent()
-  }, [])
-
-  if (isLoading) {
-    return (
-      <section>
-        <p>Loading.....</p>
-      </section>
-    )
+  if (error) {
+    console.log(error)
   }
-
 
   return (
     <section>
+      {isLoading && <Loading />}
       <DeletePopup />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <h1>All Meetups</h1>
       <MeetupList />
     </section>

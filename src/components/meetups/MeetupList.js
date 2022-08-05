@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
-import MeetupsContext from '../../store/meetups-context'
 import classes from './MeetupList.module.css'
 
 import MeetupItem from './MeetupItem'
+import useRequest from '../../hooks/use-request'
 
 
 const MeetupList = (props) => {
-  const {loadedMeetups} = useContext(MeetupsContext)
+  const {loadedMeetups} = useRequest()
+
   let meetups = []
   if (props.meetups) {
     meetups = [...props.meetups]

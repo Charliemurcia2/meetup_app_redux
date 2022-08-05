@@ -1,53 +1,120 @@
 import React from "react"
-import { useRef } from "react"
+import useInput from "../../hooks/use-input"
+import useRequest from "../../hooks/use-request"
 
 import Card from '../ui/Card'
 import classes from './NewMeetupForm.module.css'
 
+const notEmptyValidation = value => value.trim() !== ''
+const imageValidation = value => {
+  const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+  return regex.test(value)
+}
+
 const NewMeetupForm = props => {
-  const titleInputRef = useRef()
-  const imageInputRef = useRef()
-  const addressInputRef = useRef()
-  const descriptionInputRef = useRef()
+  const {addNewMeetupHandler: onAddMeetup} = useRequest()
+
+  const {
+    value: enteredTitle,
+    valueChangeHandler: titleChangeHandler,
+    isValid: enteredTitleIsValid,
+    hasError: titleInputHasError,
+    inputBlurHandler: titleBlurHandler
+  } = useInput(notEmptyValidation)
+  const {
+    value: enteredImage,
+    valueChangeHandler: imageChangeHandler,
+    isValid: enteredImageIsValid,
+    hasError: imageInputHasError,
+    inputBlurHandler: imageBlurHandler
+  } = useInput(imageValidation)
+  const {
+    value: enteredAddress,
+    valueChangeHandler: addressChangeHandler,
+    isValid: enteredAddressIsValid,
+    hasError: addressInputHasError,
+    inputBlurHandler: addressBlurHandler
+  } = useInput(notEmptyValidation)
+  const {
+    value: enteredDescription,
+    valueChangeHandler: descriptionChangeHandler,
+    isValid: enteredDescriptionIsValid,
+    hasError: descriptionInputHasError,
+    inputBlurHandler: descriptionBlurHandler
+  } = useInput(notEmptyValidation)
+  const {
+    value: enteredDate,
+    valueChangeHandler: dateChangeHandler,
+    isValid: enteredDateIsValid,
+    hasError: dateInputHasError,
+    inputBlurHandler: dateBlurHandler
+  } = useInput(notEmptyValidation)
+
+  let  formIsValid = false
+
+  if (enteredTitleIsValid && enteredImageIsValid && enteredAddressIsValid && enteredDescriptionIsValid && enteredDateIsValid) {
+    formIsValid = true
+  }
 
   const submitHandler = event => {
     event.preventDefault()
-    const enteredTitle = titleInputRef.current.value
-    const enteredImage = imageInputRef.current.value
-    const enteredAddress = addressInputRef.current.value
-    const enteredDescription = descriptionInputRef.current.value
 
     const meetupData = {
       title: enteredTitle,
       image: enteredImage,
       address: enteredAddress,
-      description: enteredDescription
+      description: enteredDescription,
+      date: enteredDate
     }
     
-    props.onAddMeetup(meetupData)
-
+    onAddMeetup(meetupData)
   }
+
+  const titleInputClasses = titleInputHasError
+    ? `${classes.control} ${classes.invalid}`
+    : classes.control
+  const imageInputClasses = imageInputHasError
+    ? `${classes.control} ${classes.invalid}`
+    : classes.control
+  const addressInputClasses = addressInputHasError
+    ? `${classes.control} ${classes.invalid}`
+    : classes.control
+  const descriptionInputClasses = descriptionInputHasError
+    ? `${classes.control} ${classes.invalid}`
+    : classes.control
+  const dateInputClasses = dateInputHasError
+    ? `${classes.control} ${classes.invalid}`
+    : classes.control
+
   return (
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.control}>
+        <div className={titleInputClasses}>
           <label htmlFor="title">Meetup Title</label>
-          <input type='text' required id='title' ref={titleInputRef}/>
+          <input type='text' required id='title' value={enteredTitle} onChange={titleChangeHandler} onBlur={titleBlurHandler}/>
         </div>
-        <div className={classes.control}>
+        {titleInputHasError && <p className={classes.feed}>Title must not be empty</p>}
+        <div className={imageInputClasses}>
           <label htmlFor="image">Meetup Image</label>
-          <input type='url' required id='image' ref={imageInputRef}/>
+          <input type='url' required id='image' value={enteredImage} onChange={imageChangeHandler} onBlur={imageBlurHandler}/>
         </div>
-        <div className={classes.control}>
+        {imageInputHasError && <p className={classes.feed}>Please enter valid image url</p>}
+        <div className={addressInputClasses}>
           <label htmlFor="address">Address</label>
-          <input type='text' required id='address' ref={addressInputRef}/>
+          <input type='text' required id='address' value={enteredAddress} onChange={addressChangeHandler} onBlur={addressBlurHandler}/>
         </div>
-        <div className={classes.control}>
+        <div className={dateInputClasses}>
+          <label htmlFor="date">Date</label>
+          <input type='date' required id='date' value={enteredDate} onChange={dateChangeHandler} onBlur={dateBlurHandler}/>
+        </div>
+        {dateInputHasError && <p className={classes.feed}>Please enter a date</p>}
+        <div className={descriptionInputClasses}>
           <label htmlFor="description">Description</label>
-          <textarea id="description" required rows='5' ref={descriptionInputRef}></textarea>
+          <textarea id="description" required rows='5' value={enteredDescription} onChange={descriptionChangeHandler} onBlur={descriptionBlurHandler}></textarea>
         </div>
+        {descriptionInputHasError && <p className={classes.feed}>Description must not be empty</p>}
         <div className={classes.actions}>
-          <button>Add Meetup</button>
+          <button disabled={!formIsValid}>Add Meetup</button>
         </div>
       </form>
     </Card>
