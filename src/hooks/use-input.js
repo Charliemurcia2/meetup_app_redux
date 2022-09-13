@@ -15,12 +15,16 @@ const useInput = validateValue => {
     setIsTouched(true)
   }
 
+  const clearInput = event => {
+    setEnteredValue('')
+  }
   return {
     value: enteredValue,
     isValid: valueIsValid,
     hasError,
     valueChangeHandler,
-    inputBlurHandler
+    inputBlurHandler,
+    clearInput
   }
 }
 

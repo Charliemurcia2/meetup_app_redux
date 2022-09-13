@@ -1,18 +1,14 @@
 import React, { useContext, useEffect } from 'react'
-
-import MeetupList from '../components/meetups/MeetupList'
-import DeletePopup from '../components/layout/DeletePopup'
-// import SearchBar from '../components/layout/SearchBar'
 import Loading from '../components/layout/Loading'
 import useRequest from '../hooks/use-request'
 import MeetupsContext from '../store/meetups-context'
+import NewUserForm from '../users/NewUserForm'
+import UsersList from '../users/UsersList'
 import { types } from '../Reducers/reducer'
 
-
-
-const AllMeetups = () => {
+const Users = props => {
   const meetupCtx = useContext(MeetupsContext)
-  const { URLS,  dispatch} = meetupCtx
+  const { URLS, dispatch } = meetupCtx
 
   const {isLoading, callAPI} = useRequest()
 
@@ -38,12 +34,10 @@ const AllMeetups = () => {
   return (
     <section>
       {isLoading && <Loading />}
-      <DeletePopup />
-      {/* <SearchBar /> */}
-      <h1>All Meetups</h1>
-      <MeetupList />
+      <NewUserForm />
+      <UsersList />
     </section>
   )
 }
 
-export default AllMeetups
+export default Users

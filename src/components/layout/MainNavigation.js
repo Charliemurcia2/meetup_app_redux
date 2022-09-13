@@ -22,6 +22,7 @@ const MainNavigation = () => {
           <li><Link to='/'>All Meetups</Link></li>
           <li><Link to='/new-meetup'>new meetup</Link></li>
           <li><Link to='/favorites'>My favortites <span className={classes.badge}>{favoritesCtx.totalFavorites}</span></Link></li>
+          <li><Link to='/users'>Users</Link></li>
         </ul>
       </nav>
       <select className={classes['theme-button']} onChange={changeThemeHandler}>

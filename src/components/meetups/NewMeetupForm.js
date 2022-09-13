@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useContext } from "react"
 import useInput from "../../hooks/use-input"
 import useRequest from "../../hooks/use-request"
+import MeetupsContext from "../../store/meetups-context"
+import { useHistory } from "react-router-dom"
 
 import Card from '../ui/Card'
 import classes from './NewMeetupForm.module.css'
@@ -12,7 +14,9 @@ const imageValidation = value => {
 }
 
 const NewMeetupForm = props => {
-  const {addNewMeetupHandler: onAddMeetup} = useRequest()
+  const {callAPI} = useRequest()
+  const meetupsCtx = useContext(MeetupsContext)
+  const history = useHistory()
 
   const {
     value: enteredTitle,
@@ -64,10 +68,17 @@ const NewMeetupForm = props => {
       image: enteredImage,
       address: enteredAddress,
       description: enteredDescription,
-      date: enteredDate
+      date: enteredDate,
+      attendeesId: ''
     }
     
-    onAddMeetup(meetupData)
+    callAPI(`${meetupsCtx.URLS.meetup}.json`, 'POST',meetupData)
+    .then(() => {
+      
+      // TODO: crear un accion y estado y actualizarlo y se haga el renderizado y retirar el history
+      //TODO: crear lista filtrada con base al resultado de la busqueda
+      history.replace('/')
+    })
   }
 
   const titleInputClasses = titleInputHasError

@@ -1,0 +1,17 @@
+.user_card {
+  margin: auto;
+  width: 95%;
+  background-color: rgb(189, 189, 189);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark {
+  background-color: rgb(120, 117, 117);
+  box-shadow: 0 2px 8px rgba(251, 250, 250, 0.204);
+
+}
+
+.dark h3 {
+  color: rgb(228, 222, 222);
+}

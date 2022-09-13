@@ -1,0 +1,70 @@
+.guests-card {
+  background-color: rgb(244, 240, 240);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+}
+
+.guests-card h2 {
+  text-align: center;
+}
+.guests-card ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: center;
+  list-style: none;
+  padding: 10px;
+}
+
+.guests-card li {
+  margin: 5px;
+  width: 30%;
+  background-color: rgb(253, 253, 253);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.guests-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.guests-card button {
+  margin: 10px;
+  height: 30px;
+  border-radius: 5px;
+}
+.confirmed-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid green;
+  color: green;
+  padding: 5px;
+}
+.confirmed-button:hover {
+  background-color: rgb(192, 231, 192);
+}
+.rejected-button {
+  background-color: transparent;
+  border: 1px solid red;
+  color: red;
+}
+.requested-button {
+  background-color: transparent;
+  border: 1px solid gray;
+  color: gray;
+}
+
+.guests-card .status {
+  background-color: azure;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 20px;
+  color: black;
+}
+

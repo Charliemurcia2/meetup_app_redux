@@ -9,7 +9,7 @@
 }
 
 .modal {
-  position: fixed;
+  position: absolute;
   top: 20vh;
   left: 5%;
   width: 90%;
@@ -19,6 +19,26 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
+}
+
+.modal h2 {
+  text-align: center;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  color: #77002e;
+  border: 1px solid #77002e;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+
+button:hover,
+button:active {
+  background-color: #ffe2ed;
 }
 
 @media (min-width: 768px) {

@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import classes from './MeetupList.module.css'
 
 import MeetupItem from './MeetupItem'
-import useRequest from '../../hooks/use-request'
+import MeetupsContext from '../../store/meetups-context'
 
 
 const MeetupList = (props) => {
-  const {loadedMeetups} = useRequest()
+  const meetupsCtx = useContext(MeetupsContext)
+  const {state} = meetupsCtx
 
-  let meetups = []
-  if (props.meetups) {
-    meetups = [...props.meetups]
-  } else {
-    meetups = loadedMeetups
-  }
-   return (
+  let meetups = (props.meetups
+    ? [...props.meetups]
+    : [...state.meetups]
+  )
+
+  return (
       <ul className={classes.list}>
         {meetups.map(meetup => <MeetupItem key={meetup.id} meetup={meetup} />)}
       </ul>

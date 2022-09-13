@@ -1,4 +1,6 @@
-import React, { useState, createContext }from 'react'
+import React, { useState, createContext, useReducer }from 'react'
+
+import reducer, { initialState } from '../Reducers/reducer'
 
 const MeetupsContext = createContext({
   isPopupDelete: false,
@@ -7,9 +9,20 @@ const MeetupsContext = createContext({
 })
 
 export const MeetupsContextProvider = props => {
+  // const [loadedMeetups, setLoadedMeetups] = useState([])
+  // const [staticLoadMeetups, setStaticLoadMeetups] = useState([])
   const [isPopupDelete, setIsPopupDelete] = useState(false)
-  
 
+  // const [loadedMeetups, dispatchLoadedMeetups] = useReducer(usersReducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+
+  
+  const URLS = {
+    meetup: 'https://react-learn-1e665-default-rtdb.firebaseio.com/meetups',
+    users: 'https://react-learn-1e665-default-rtdb.firebaseio.com/users'
+  }
+  
   // const searchFilter = searchTerm => {
   //   const searchResult = staticLoadMeetups.filter(meetup => {
   //    if (meetup.title.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -31,14 +44,15 @@ export const MeetupsContextProvider = props => {
   const closeDeletePopupHandler = () => {
     setIsPopupDelete(false)
   }
-  const openDeletePopupHandler = () => {
-    setIsPopupDelete(true)
-  }
 
   const context = {
     isPopupDelete,
+    setIsPopupDelete,
     closeDeletePopupHandler,
-    openDeletePopupHandler,
+    dispatch,
+    state,
+    // setStaticLoadMeetups,
+    URLS
   }
   return (
     <MeetupsContext.Provider value={context}>
