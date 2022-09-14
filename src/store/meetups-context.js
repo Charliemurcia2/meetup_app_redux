@@ -1,4 +1,4 @@
-import React, { useState, createContext, useReducer }from 'react'
+import React, { createContext, useReducer }from 'react'
 
 import reducer, { initialState } from '../Reducers/reducer'
 
@@ -9,11 +9,6 @@ const MeetupsContext = createContext({
 })
 
 export const MeetupsContextProvider = props => {
-  // const [loadedMeetups, setLoadedMeetups] = useState([])
-  // const [staticLoadMeetups, setStaticLoadMeetups] = useState([])
-  const [isPopupDelete, setIsPopupDelete] = useState(false)
-
-  // const [loadedMeetups, dispatchLoadedMeetups] = useReducer(usersReducer, initialState)
   const [state, dispatch] = useReducer(reducer, initialState)
 
 
@@ -41,14 +36,7 @@ export const MeetupsContextProvider = props => {
   //   }
   // }
 
-  const closeDeletePopupHandler = () => {
-    setIsPopupDelete(false)
-  }
-
   const context = {
-    isPopupDelete,
-    setIsPopupDelete,
-    closeDeletePopupHandler,
     dispatch,
     state,
     // setStaticLoadMeetups,
