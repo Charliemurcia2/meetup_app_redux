@@ -14,7 +14,7 @@ const App = () => {
       <MeetupsContextProvider>
         <Layout>
           <Switch>
-            <Route path='/' exact>
+            <Route path='/meetup_app' exact>
               <AllMeetups />
             </Route>
             <Route path='/new-meetup'> 
