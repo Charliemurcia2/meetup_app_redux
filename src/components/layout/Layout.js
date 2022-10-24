@@ -1,23 +1,18 @@
-import React, { useContext } from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
 
-import classes from './Layout.module.css'
-import MainNavigation from './MainNavigation'
-import ThemeContext from '../../store/theme-context'
+import classes from "./Layout.module.css";
+import MainNavigation from "./MainNavigation";
 
-const Layout = props => {
-  const themeCtx = useContext(ThemeContext)
-  const theme = themeCtx.theme
-  
+const Layout = (props) => {
+  const theme = useSelector((state) => state.ui.chosenTheme);
+
   return (
     <div className={classes[theme]}>
       <MainNavigation />
-      <main className={classes.main}>
-        {props.children}
-      </main>
+      <main className={classes.main}>{props.children}</main>
     </div>
+  );
+};
 
-  )
-
-}
-
-export default Layout
+export default Layout;

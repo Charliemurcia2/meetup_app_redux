@@ -1,25 +1,22 @@
-import React, { useContext } from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
 
-import classes from './MeetupList.module.css'
+import classes from "./MeetupList.module.css";
 
-import MeetupItem from './MeetupItem'
-import MeetupsContext from '../../store/meetups-context'
-
+import MeetupItem from "./MeetupItem";
 
 const MeetupList = (props) => {
-  const meetupsCtx = useContext(MeetupsContext)
-  const {state} = meetupsCtx
+  const stateMeetups = useSelector((state) => state.meetup.meetups);
 
-  let meetups = (props.meetups
-    ? [...props.meetups]
-    : [...state.meetups]
-  )
+  let meetups = props.meetups ? [...props.meetups] : [...stateMeetups];
 
   return (
-      <ul className={classes.list}>
-        {meetups.map(meetup => <MeetupItem key={meetup.id} meetup={meetup} />)}
-      </ul>
-   )
-}
+    <ul className={classes.list}>
+      {meetups.map((meetup) => (
+        <MeetupItem key={meetup.id} meetup={meetup} />
+      ))}
+    </ul>
+  );
+};
 
-export default MeetupList
+export default MeetupList;

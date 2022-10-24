@@ -1,16 +1,14 @@
-import React, { useContext } from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
 
-import classes from './Card.module.css' 
-import ThemeContext from '../../store/theme-context'
+import classes from "./Card.module.css";
 
-const Card = props => {
-  const themeCtx = useContext(ThemeContext)
+const Card = (props) => {
+  const theme = useSelector((state) => state.ui.chosenTheme);
 
-  return(
-    <div className={`${classes.card} ${classes[themeCtx.theme]}`}>
-      {props.children}
-    </div>
-  )
-}
+  return (
+    <div className={`${classes.card} ${classes[theme]}`}>{props.children}</div>
+  );
+};
 
-export default Card
+export default Card;
