@@ -26,6 +26,7 @@ const MeetupItem = (props) => {
 
   const validateIsFavorite = (id) => {
     if (favorites.some((meetupId) => meetupId === id)) {
+      dispatch(favoriteActions.isFavorite(id));
       setIsFavorite(true);
     }
   };
@@ -33,7 +34,7 @@ const MeetupItem = (props) => {
   validateIsFavorite(id);
 
   const toggleFavoriteStatusHandler = () => {
-    if (isFavorite) {
+    if (isFavorite || location.pathname === "/favorites") {
       dispatch(favoriteActions.removeFromFavorites(id));
       setIsFavorite(false);
     } else {
@@ -75,7 +76,9 @@ const MeetupItem = (props) => {
         </div>
         <div className={classes.actions}>
           <button onClick={toggleFavoriteStatusHandler}>
-            {isFavorite ? "Remove from favorites" : "To Favorites"}
+            {isFavorite || location.pathname === "/favorites"
+              ? "Remove from favorites"
+              : "To Favorites"}
           </button>
           {location.pathname === "/" ? (
             <button onClick={deleteMeetupHandler}>Delete Meetup</button>

@@ -1,6 +1,5 @@
 {
-  "name": "meetup_app",
-  "homepage": "https://charliemurcia2.github.io/meetup_app",
+  "name": "meetup_app_redux",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
